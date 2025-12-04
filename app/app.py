@@ -1,7 +1,6 @@
 from flask import Flask, render_template
 
 app = Flask(__name__)
-app.template_folder = "templates"
 app.static_folder = "static"
 
 # Define what they user should see when they visit the root URL
