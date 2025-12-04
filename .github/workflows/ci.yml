@@ -11,11 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      #Checkout repo
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      #Setup Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -29,20 +27,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      #Install Dependencies
-      - name: Install Dependecies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      #Create environment variables for tests
+      # Only needed when your API uses Alpha Vantage
       - name: Set environment variables for tests
         run: |
-          echo "ALPHA_VANTAGE_API=WKHNK5JZSWC0WQRE" >> $GITHUB_ENV
+          echo "ALPHA_VANTAGE_API=TESTKEY" >> $GITHUB_ENV
 
-      - name: Run Tests
-        run: |
-          pytest -q
+      - name: Run tests
+        run: pytest -q
 
       - name: Lint with flake8
         run: |
